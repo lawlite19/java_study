@@ -23,18 +23,16 @@ public class AioServer {
         //打开一个服务通道
         //绑定服务端口
         this.serverChannel = AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(port), 100);
+        // 接收连接请求
         this.serverChannel.accept(this, new AcceptHandler());
 
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    System.out.println("运行中...");
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        Thread t = new Thread(() -> {
+            while (true) {
+                System.out.println("运行中...");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });
