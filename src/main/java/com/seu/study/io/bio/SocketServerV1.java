@@ -22,9 +22,9 @@ public class SocketServerV1 {
         try (InputStream inputStream = client.getInputStream();) {
             byte[] bytes = new byte[1024];
             // 程序阻塞，没有数据可读时就阻塞
-            int read = inputStream.read(bytes);
-            if (read != -1) {
-                System.out.println("读取客户端数据：" + new String(bytes, StandardCharsets.UTF_8));
+            while ((inputStream.read(bytes)) != -1) {
+                System.out.println("读取客户端数据：" +
+                        new String(bytes, StandardCharsets.UTF_8));
             }
         } catch (IOException e) {
             e.printStackTrace();

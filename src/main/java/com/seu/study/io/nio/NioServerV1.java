@@ -37,7 +37,8 @@ public class NioServerV1 {
                 ByteBuffer byteBuffer = ByteBuffer.allocate(256);
                 int read = sc.read(byteBuffer);
                 if (read > 0) {
-                    System.out.println("读取客户端数据: " + new String(byteBuffer.array(), StandardCharsets.UTF_8));
+                    System.out.println("读取客户端数据: " +
+                            new String(byteBuffer.array(), StandardCharsets.UTF_8));
                 } else if (read == -1) {
                     // 客户端断开连接，从连接中移除。
                     iterator.remove();

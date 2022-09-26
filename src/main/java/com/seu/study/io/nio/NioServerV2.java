@@ -24,11 +24,9 @@ public class NioServerV2 {
         // 把ServerSocketChannel注册到Selector上
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         System.out.println("服务启动成功");
-
         while (true) {
             // 阻塞等待需要处理的事件发生
             selector.select();
-
             // 获取selector中注册的全部时间的SelectKey实例
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
             Iterator<SelectionKey> iterator = selectionKeys.iterator();
@@ -48,7 +46,8 @@ public class NioServerV2 {
                     ByteBuffer byteBuffer = ByteBuffer.allocate(256);
                     int len = socketChannel.read(byteBuffer);
                     if (len > 0) {
-                        System.out.println("读取客户端数据: " + new String(byteBuffer.array(), StandardCharsets.UTF_8));
+                        System.out.println("读取客户端数据: " +
+                                new String(byteBuffer.array(), StandardCharsets.UTF_8));
                     } else if (len == -1) {
                         // 客户端断开连接，从连接中移除。
                         System.out.println("客户端断开连接");

@@ -22,7 +22,8 @@ public class AioServer {
     public void listen() throws Exception {
         //打开一个服务通道
         //绑定服务端口
-        this.serverChannel = AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(port), 100);
+        this.serverChannel = AsynchronousServerSocketChannel.open()
+                .bind(new InetSocketAddress(port), 100);
         // 接收连接请求
         this.serverChannel.accept(this, new AcceptHandler());
 
